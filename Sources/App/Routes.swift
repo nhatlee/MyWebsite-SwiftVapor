@@ -7,10 +7,10 @@ final class Router: RouteCollection {
     }
     
     func build(_ builder: RouteBuilder) throws {
-        /// GET /
-        builder.get { req in
-            return try self.view.make("welcome")
+        builder.group("api") { (route) in
+            route.resource("user", UserController())
         }
+        
         
         /// GET /hello/...
         builder.resource("hello", HelloController(view))
@@ -22,6 +22,7 @@ final class Router: RouteCollection {
         }
         
         builder.get("allusers") { req in
+            print(req.uri.path)
             let listUser = try User.all()
             var message = ""
             for user in listUser {
@@ -30,7 +31,26 @@ final class Router: RouteCollection {
             return message
         }
         
-        builder.post("user", "new") { (request) -> ResponseRepresentable in
+        builder.get("/email",":email") { (req) -> ResponseRepresentable in
+            if let mail = req.parameters["email"]?.string {
+                let listUser = try User.all()
+                let user = listUser.filter {$0.email == mail}
+                return "Your email:\(user.first?.email) with name \(user.first?.userName) exist in data base"
+            }
+            return "Error retrieving parameters."
+        }
+        
+        builder.get("randomUser") { (req) -> ResponseRepresentable in
+            let listUser = try User.all()
+            let _user = listUser.first
+            return try JSON(node: [
+                "name": _user?.userName,
+                "email": _user?.email
+                ])
+        }
+        
+        //createUser
+        builder.post("user", "createUser") { (request) -> ResponseRepresentable in
             guard let userName = request.data["username"]?.string,
                 let password = request.data["password"]?.string,
                 let email = request.data["email"]?.string else {
@@ -50,30 +70,34 @@ final class Router: RouteCollection {
             
             return "Success!\n\nUser Info:\nName: \(user.userName)\nPassword: \(user.password)\nEmail: \(user.email)\nID: \(String(describing: user.id?.wrapped))"
         }
+        
+        
+        
     }
 }
 
 extension Droplet {
-    func setupRoutes() throws {
-        get("hello") { req in
-            var json = JSON()
-            try json.set("hello", "world")
-            return json
-        }
-
-        get("plaintext") { req in
-            return "Hello, world!"
-        }
-
-        // response to requests to /info domain
-        // with a description of the request
-        get("info") { req in
-            return req.description
-        }
-
-        get("description") { req in return req.description }
-
-        try resource("posts", PostController.self)
-    }
+    
+//    func setupRoutes() throws {
+//        get("hello") { req in
+//            var json = JSON()
+//            try json.set("hello", "world")
+//            return json
+//        }
+//
+//        get("plaintext") { req in
+//            return "Hello, world!"
+//        }
+//
+//        // response to requests to /info domain
+//        // with a description of the request
+//        get("info") { req in
+//            return req.description
+//        }
+//
+//        get("description") { req in return req.description }
+//
+//        try resource("posts", PostController.self)
+//    }
 }
 
