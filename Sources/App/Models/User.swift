@@ -3,9 +3,13 @@
 //  MyWebsite
 //
 //  Created by nhatlee on 9/23/17.
-//
+//{
 
 import PostgreSQLProvider
+
+//enum Error: Swift.Error {
+//    case nullValue
+//}
 
 final class User: Model {
     let storage = Storage()
@@ -25,6 +29,18 @@ final class User: Model {
         self.email = try row.get(UserKeys.email.rawValue)
         self.password = try row.get(UserKeys.password.rawValue)
     }
+    
+    init(request: Request) throws {
+        guard let name = request.data[UserKeys.name.rawValue]?.string,
+            let email = request.data[UserKeys.email.rawValue]?.string,
+            let password = request.data[UserKeys.password.rawValue]?.string else {
+                throw Abort(.notFound, metadata: nil, reason: "email, username, password are require", identifier: nil, possibleCauses: nil, suggestedFixes: ["input your email, name, password"], documentationLinks: nil, stackOverflowQuestions: nil, gitHubIssues: nil)
+        }
+        self.userName = name
+        self.email = email
+        self.password = password
+    }
+    
 }
 
 extension User: RowRepresentable {

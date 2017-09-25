@@ -31,10 +31,7 @@ final class UserController: ResourceRepresentable {
     //This function has grouped: api and resource is: user
     //URL: http://localhost:8080/api/user
     func create(req: Request) throws -> ResponseRepresentable {
-        guard let email = req.data[UserKeys.email.rawValue]?.string, let name = req.data[UserKeys.name.rawValue]?.string, let pass = req.data[UserKeys.password.rawValue]?.string else {
-            throw Abort(.notFound, metadata: nil, reason: "email not found", identifier: nil, possibleCauses: nil, suggestedFixes: ["input your email"], documentationLinks: nil, stackOverflowQuestions: nil, gitHubIssues: nil)
-        }
-        let user = User(userName: name, email: email, password: pass)
+        let user = try User(request: req)
         if !(try Ultility.isExist(user)) {
             //Save to local database
             try user.save()
@@ -51,7 +48,7 @@ final class UserController: ResourceRepresentable {
             }
             return JSON(listJson)
         } else {
-            return "User with email:\(email) has exist in database"
+            return "User with email:\(user.email) has exist in database"
         }
     }
 }
