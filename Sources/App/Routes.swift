@@ -32,7 +32,7 @@ final class Router: RouteCollection {
         }
         
         builder.get("/email",":email") { (req) -> ResponseRepresentable in
-            if let mail = req.parameters["email"]?.string {
+            if let mail = req.parameters[UserKeys.email.rawValue]?.string {
                 let listUser = try User.all()
                 let user = listUser.filter {$0.email == mail}
                 return "Your email:\(user.first?.email) with name \(user.first?.userName) exist in data base"
@@ -51,9 +51,9 @@ final class Router: RouteCollection {
         
         //createUser
         builder.post("user", "createUser") { (request) -> ResponseRepresentable in
-            guard let userName = request.data["username"]?.string,
-                let password = request.data["password"]?.string,
-                let email = request.data["email"]?.string else {
+            guard let userName = request.data[UserKeys.name.rawValue]?.string,
+                let password = request.data[UserKeys.password.rawValue]?.string,
+                let email = request.data[UserKeys.email.rawValue]?.string else {
                     throw Abort.badRequest
             }
             let listUser = try User.all()

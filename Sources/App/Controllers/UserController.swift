@@ -4,7 +4,7 @@
 //
 //  Created by nhatlee on 9/24/17.
 //
-
+//import App
 import Vapor
 import HTTP
 
@@ -28,22 +28,30 @@ final class UserController: ResourceRepresentable {
         )
     }
     //This is where the 'post' request gets redirected to
+    //This function has grouped: api and resource is: user
+    //URL: http://localhost:8080/api/user
     func create(req: Request) throws -> ResponseRepresentable {
-//        print(req.parameters)
-//        print(req.body)
-        guard let email = req.parameters["email"] as? String else {
+        guard let email = req.data[UserKeys.email.rawValue]?.string, let name = req.data[UserKeys.name.rawValue]?.string, let pass = req.data[UserKeys.password.rawValue]?.string else {
             throw Abort(.notFound, metadata: nil, reason: "email not found", identifier: nil, possibleCauses: nil, suggestedFixes: ["input your email"], documentationLinks: nil, stackOverflowQuestions: nil, gitHubIssues: nil)
         }
-        let user = User(userName: "post user", email: email, password: "123456")
-        users.append(user)
-        var listJson: [JSON] = []
-        for u in users {
-            let json = try JSON(node: [
-                "name": u.userName,
-                "email": u.email
-                ])
-            listJson.append(json)
+        let user = User(userName: name, email: email, password: pass)
+        if !(try Ultility.isExist(user)) {
+            //Save to local database
+            try user.save()
+            
+            users.append(user)
+            var listJson: [JSON] = []
+            for u in users {
+                let json = try JSON(node: [
+                    "name": u.userName,
+                    "email": u.email,
+                    "Pass" : u.password
+                    ])
+                listJson.append(json)
+            }
+            return JSON(listJson)
+        } else {
+            return "User with email:\(email) has exist in database"
         }
-        return JSON(listJson)
     }
 }

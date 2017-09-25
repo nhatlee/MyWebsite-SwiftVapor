@@ -21,18 +21,18 @@ final class User: Model {
     }
     
     init(row: Row) throws {
-        self.userName = try row.get("username")
-        self.email = try row.get("email")
-        self.password = try row.get("password")
+        self.userName = try row.get(UserKeys.name.rawValue)
+        self.email = try row.get(UserKeys.email.rawValue)
+        self.password = try row.get(UserKeys.password.rawValue)
     }
 }
 
 extension User: RowRepresentable {
     func makeRow() throws -> Row {
         var row = Row()
-        try row.set("username", userName)
-        try row.set("email", email)
-        try row.set("password", password)
+        try row.set(UserKeys.name.rawValue, userName)
+        try row.set(UserKeys.email.rawValue, email)
+        try row.set(UserKeys.password.rawValue, password)
         return row
     }
 }
@@ -42,9 +42,9 @@ extension User: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self, closure: { (user) in
             user.id()
-            user.string("username")
-            user.string("email")
-            user.string("password")
+            user.string(UserKeys.name.rawValue)
+            user.string(UserKeys.email.rawValue)
+            user.string(UserKeys.password.rawValue)
         })
     }
     
