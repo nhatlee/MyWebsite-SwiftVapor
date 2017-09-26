@@ -36,7 +36,7 @@ final class Router: RouteCollection {
         }
         
         builder.get("welcome") { req in
-            return try self.view.make("welcome")
+            return try self.view.make("welcome.leaf")
         }
         
         builder.get("/email",":email") { (req) -> ResponseRepresentable in
