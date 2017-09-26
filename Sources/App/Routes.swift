@@ -1,4 +1,5 @@
 import Vapor
+import LeafProvider
 
 final class Router: RouteCollection {
     let view: ViewRenderer
@@ -11,6 +12,9 @@ final class Router: RouteCollection {
             route.resource("user", UserController())
         }
         
+//        builder.group("api") { (route) in
+//            route.resource("test", TController())
+//        }
         
         /// GET /hello/...
         builder.resource("hello", HelloController(view))
@@ -31,23 +35,19 @@ final class Router: RouteCollection {
             return message
         }
         
+        builder.get("welcome") { req in
+            return try self.view.make("welcome")
+        }
+        
         builder.get("/email",":email") { (req) -> ResponseRepresentable in
             if let mail = req.parameters[UserKeys.email.rawValue]?.string {
                 let listUser = try User.all()
-                let user = listUser.filter {$0.email == mail}
-                return "Your email:\(user.first?.email) with name \(user.first?.userName) exist in data base"
+                let user = listUser.filter {$0.email == mail}.first
+                return "Your email:\(mail) with name \(user?.userName) exist in data base"
             }
             return "Error retrieving parameters."
         }
         
-        builder.get("randomUser") { (req) -> ResponseRepresentable in
-            let listUser = try User.all()
-            let _user = listUser.first
-            return try JSON(node: [
-                "name": _user?.userName,
-                "email": _user?.email
-                ])
-        }
         
         //createUser
         builder.post("user", "createUser") { (request) -> ResponseRepresentable in
