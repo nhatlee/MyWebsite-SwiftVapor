@@ -1,5 +1,5 @@
 import App
-import LeafProvider
+
 
 /// We have isolated all of our App's logic into
 /// the App module because it makes our app
@@ -18,7 +18,6 @@ import LeafProvider
 /// .run() runs the Droplet's commands, 
 /// if no command is given, it will default to "serve"
 let config = try Config()
-try config.addProvider(LeafProvider.Provider.self)
 try config.setup()
 
 let drop = try Droplet(config)

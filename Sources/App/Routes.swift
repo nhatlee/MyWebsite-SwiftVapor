@@ -35,15 +35,15 @@ final class Router: RouteCollection {
             return message
         }
         
-        builder.get("welcome") { req in
-            return try self.view.make("welcome.leaf")
+        builder.get("login") { req in
+            return try self.view.make("login")
         }
         
         builder.get("/email",":email") { (req) -> ResponseRepresentable in
             if let mail = req.parameters[UserKeys.email.rawValue]?.string {
                 let listUser = try User.all()
                 let user = listUser.filter {$0.email == mail}.first
-                return "Your email:\(mail) with name \(user?.userName) exist in data base"
+                return "Your email:\(mail) with name \(user?.userName ?? "") exist in data base"
             }
             return "Error retrieving parameters."
         }
@@ -70,9 +70,6 @@ final class Router: RouteCollection {
             
             return "Success!\n\nUser Info:\nName: \(user.userName)\nPassword: \(user.password)\nEmail: \(user.email)\nID: \(String(describing: user.id?.wrapped))"
         }
-        
-        
-        
     }
 }
 

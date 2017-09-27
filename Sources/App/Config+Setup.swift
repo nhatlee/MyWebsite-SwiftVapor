@@ -1,5 +1,6 @@
 import FluentProvider
 import PostgreSQLProvider
+import LeafProvider
 
 extension Config {
     public func setup() throws {
@@ -10,6 +11,12 @@ extension Config {
         try setupProviders()
         try setupPreparations()
         addPreparation()
+        try setupProvider()
+    }
+    
+    //setup provider
+    private func setupProvider() throws {
+        try addProvider(LeafProvider.Provider.self)
     }
     
     /// Configure providers
