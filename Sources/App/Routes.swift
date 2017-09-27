@@ -39,6 +39,10 @@ final class Router: RouteCollection {
             return try self.view.make("login")
         }
         
+        builder.get("base") { (req) -> ResponseRepresentable in
+            return try self.view.make("base")
+        }
+        
         builder.get("/email",":email") { (req) -> ResponseRepresentable in
             if let mail = req.parameters[UserKeys.email.rawValue]?.string {
                 let listUser = try User.all()

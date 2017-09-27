@@ -3,12 +3,12 @@
     <head>
         <meta charset="UTF-8">
             <title>login screen</title>
-            <link rel="stylesheet" href="css/style.css">
+            <link rel="stylesheet" href="styles/style.css">
     </head>
     
     <body>
         
-        <form name="frmregister" action="<?= $_SERVER['PHP_SELF'] ?>" method="post" style="text-align: center;">
+        <form name="frmregister" action="<create>" method="post" style="text-align: center;">
             <table border="0">
                 <tr>
                     <td></td>
