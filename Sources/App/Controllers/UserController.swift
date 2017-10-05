@@ -24,13 +24,13 @@ final class UserController: ResourceRepresentable {
     func makeResource() -> Resource<User> {
         return Resource(
             index: index,
-            store: create
+            store: createUser
         )
     }
     //This is where the 'post' request gets redirected to
     //This function has grouped: api and resource is: user
     //URL: http://localhost:8080/api/user
-    func create(req: Request) throws -> ResponseRepresentable {
+    func createUser(req: Request) throws -> ResponseRepresentable {
         let user = try User(request: req)
         if !(try Ultility.isExist(user)) {
             //Save to local database

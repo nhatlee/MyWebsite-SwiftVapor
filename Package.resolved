@@ -2,6 +2,24 @@
   "object": {
     "pins": [
       {
+        "package": "Auth",
+        "repositoryURL": "https://github.com/vapor/auth.git",
+        "state": {
+          "branch": null,
+          "revision": "b8a0d6d7ac141831c999bf2458408dc2ec2edb39",
+          "version": "1.2.1"
+        }
+      },
+      {
+        "package": "AuthProvider",
+        "repositoryURL": "https://github.com/vapor/auth-provider.git",
+        "state": {
+          "branch": null,
+          "revision": "c8a89d5f32873a7ec6037e2c78a192526c496618",
+          "version": "1.2.0"
+        }
+      },
+      {
         "package": "BCrypt",
         "repositoryURL": "https://github.com/vapor/bcrypt.git",
         "state": {
@@ -80,6 +98,15 @@
           "branch": null,
           "revision": "decf702d774ac630dfe0441ff76b4bb68257b77a",
           "version": "2.2.1"
+        }
+      },
+      {
+        "package": "Flash",
+        "repositoryURL": "https://github.com/nodes-vapor/flash",
+        "state": {
+          "branch": null,
+          "revision": "11fcef1a1f5f180bd63ef9c1b82c216288c049b0",
+          "version": "1.0.0"
         }
       },
       {
@@ -215,6 +242,24 @@
           "branch": null,
           "revision": "6c6eedb6761cddc6b6c87142a27eec13fa1701ec",
           "version": "2.1.1"
+        }
+      },
+      {
+        "package": "Validation",
+        "repositoryURL": "https://github.com/vapor/validation.git",
+        "state": {
+          "branch": null,
+          "revision": "22004efe55060bb707fda0cac0508506c7730533",
+          "version": "1.0.1"
+        }
+      },
+      {
+        "package": "ValidationProvider",
+        "repositoryURL": "https://github.com/vapor/validation-provider.git",
+        "state": {
+          "branch": null,
+          "revision": "26e51591a40bb11383c3a0f8039c4b8c0cbe1a1f",
+          "version": "1.2.0"
         }
       },
       {

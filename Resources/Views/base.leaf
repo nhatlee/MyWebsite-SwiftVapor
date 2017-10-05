@@ -15,18 +15,13 @@
                 <body>
                 <link href='https://fonts.googleapis.com/css?family=Ubuntu:500' rel='stylesheet' type='text/css'>
                 
-                <div class="login">
-                <div class="login-header">
-                <h1>Login</h1>
-                </div>
-                <div class="login-form">
-                <h3>Username:</h3>
-                <input type="text" placeholder="Username"/><br>
-                <h3>Password:</h3>
-                <input type="password" placeholder="Password"/>
-                <br>
-                <input type="button" value="Login" class="login-button"/>
-                <br>
+                <form action="/user/createUser" method="POST" class="login-form">
+                <label for="username">Username:</label>
+                <input type="text" placeholder="Username" name="username"/>
+                <label for="password">Password:</label>
+                <input type="password" placeholder="Password" name="password"/>
+                <input type="submit" value="Login" class="login-button"/>
+                <form>
                 <a class="sign-up">Sign Up!</a>
                 <br>
                 <h6 class="no-access">Can't access your account?</h6>
