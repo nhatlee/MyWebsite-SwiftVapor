@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html >
+<img src="https://tse3.mm.bing.net/th?id=OIP.1Iso1sVA_hrFBs7mwKkB8AEsDI&w=78&h=78&c=7&pid=1.1" width=100% height=60>
     <head>
         <meta charset="UTF-8">
             <title>Responsive Login Form</title>
-            
             
             <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
                 
@@ -13,15 +13,17 @@
                 </head>
                 
                 <body>
+
                 <link href='https://fonts.googleapis.com/css?family=Ubuntu:500' rel='stylesheet' type='text/css'>
-                
-                <form action="/user/createUser" method="POST" class="login-form">
+                <h3>
+                <form action="/api/user" method="POST" class="login-form">
                 <label for="username">Username:</label>
                 <input type="text" placeholder="Username" name="username"/>
                 <label for="password">Password:</label>
                 <input type="password" placeholder="Password" name="password"/>
                 <input type="submit" value="Login" class="login-button"/>
                 <form>
+                </h3>
                 <a class="sign-up">Sign Up!</a>
                 <br>
                 <h6 class="no-access">Can't access your account?</h6>

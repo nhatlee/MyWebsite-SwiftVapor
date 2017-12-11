@@ -8,6 +8,7 @@ public enum UserKeys: String, CodingKey {
     case name       = "username"
     case email      = "email"
     case password   = "password"
+    case confirm    = "ConfirmPassword"
 }
 
 

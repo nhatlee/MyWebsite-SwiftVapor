@@ -39,6 +39,10 @@ final class Router: RouteCollection {
             return try self.view.make("login")
         }
         
+        builder.get("singnup") { (request) -> ResponseRepresentable in
+            return try self.view.make("singup")
+        }
+        
         builder.get("base") { (req) -> ResponseRepresentable in
             return try self.view.make("base")
         }
@@ -55,14 +59,17 @@ final class Router: RouteCollection {
         
         //createUser
         builder.post("user", "createUser") { (request) -> ResponseRepresentable in
-            guard let userName = request.data[UserKeys.name.rawValue]?.string,
-                let password = request.data[UserKeys.password.rawValue]?.string,
+            guard let password = request.data[UserKeys.password.rawValue]?.string,
+                let confirm = request.data[UserKeys.confirm.rawValue]?.string,
                 let email = request.data[UserKeys.email.rawValue]?.string else {
                     throw Abort.badRequest
             }
+            if (confirm != password) {
+                return "Password and confirm password not match"
+            }
             let listUser = try User.all()
             
-            let user = User(userName: userName, email: email, password: password)
+            let user = User(email: email, password: password)
             let list = listUser.filter { $0.email == user.email }
             if list.count > 0 {
                 let errorMsg = "The user with email:\(user.email) has exist in database"
@@ -73,6 +80,23 @@ final class Router: RouteCollection {
             }
             
             return "Success!\n\nUser Info:\nName: \(user.userName)\nPassword: \(user.password)\nEmail: \(user.email)\nID: \(String(describing: user.id?.wrapped))"
+        }
+        
+        builder.get("user", "login") { (request) -> ResponseRepresentable in
+            guard let password = request.query?[UserKeys.password.rawValue]?.string,
+                let email = request.query?[UserKeys.email.rawValue]?.string else {
+                    throw Abort.badRequest
+            }
+            let userName = request.query?[UserKeys.name.rawValue]?.string ?? "enonymous"
+            let listUser = try User.all()
+            
+            let user = User(userName: userName, email: email, password: password)
+            let list = listUser.filter { $0.email == user.email }
+            if list.count > 0 {
+                return "Success!\n\nUser Info:\nName: \(user.userName)\nPassword: \(user.password)\nEmail: \(user.email)\nID: \(String(describing: user.id?.wrapped))"
+            } else {
+                return "Failed !\n\nUser Info:\nName: \(user.userName)\nPassword: \(user.password)\nEmail: \(user.email)\nID: \(String(describing: user.id?.wrapped))"
+            }
         }
     }
 }

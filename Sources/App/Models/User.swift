@@ -18,7 +18,7 @@ final class User: Model {
     let email: String
     let password: String
     
-    init(userName: String, email: String, password: String) {
+    init(userName: String = "optional", email: String, password: String) {
         self.userName = userName
         self.email = email
         self.password = password
@@ -32,8 +32,9 @@ final class User: Model {
     
     init(request: Request) throws {
         guard let name = request.data[UserKeys.name.rawValue]?.string,
-            let email = request.data[UserKeys.email.rawValue]?.string,
-            let password = request.data[UserKeys.password.rawValue]?.string else {
+        let password = request.data[UserKeys.password.rawValue]?.string,
+            let email = request.data[UserKeys.email.rawValue]?.string
+             else {
                 throw Abort(.notFound, metadata: nil, reason: "email, username, password are require", identifier: nil, possibleCauses: nil, suggestedFixes: ["input your email, name, password"], documentationLinks: nil, stackOverflowQuestions: nil, gitHubIssues: nil)
         }
         self.userName = name
