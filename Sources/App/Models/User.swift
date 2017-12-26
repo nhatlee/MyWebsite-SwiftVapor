@@ -7,9 +7,13 @@
 
 import PostgreSQLProvider
 
-//enum Error: Swift.Error {
-//    case nullValue
-//}
+public enum UserKeys: String, CodingKey {
+    case name       = "username"
+    case email      = "email"
+    case password   = "password"
+    case confirm    = "ConfirmPassword"
+    case address    = "address"
+}
 
 final class User: Model {
     let storage = Storage()

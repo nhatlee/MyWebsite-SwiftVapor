@@ -4,12 +4,12 @@
 //
 //  Created by nhatlee on 9/25/17.
 //
-public enum UserKeys: String, CodingKey {
-    case name       = "username"
-    case email      = "email"
-    case password   = "password"
-    case confirm    = "ConfirmPassword"
-    case address    = "address"
-}
+//public enum UserKeys: String, CodingKey {
+//    case name       = "username"
+//    case email      = "email"
+//    case password   = "password"
+//    case confirm    = "ConfirmPassword"
+//    case address    = "address"
+//}
 
 
