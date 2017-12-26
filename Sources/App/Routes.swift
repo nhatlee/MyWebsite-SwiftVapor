@@ -35,6 +35,10 @@ final class Router: RouteCollection {
             return message
         }
         
+        builder.get("home") { (req) -> ResponseRepresentable in
+            return try self.view.make("aboutme1")
+        }
+        
         builder.get("login") { req in
             return try self.view.make("login")
         }
@@ -93,7 +97,8 @@ final class Router: RouteCollection {
             let user = User(userName: userName, email: email, password: password)
             let list = listUser.filter { $0.email == user.email }
             if list.count > 0 {
-                return "Success!\n\nUser Info:\nName: \(user.userName)\nPassword: \(user.password)\nEmail: \(user.email)\nID: \(String(describing: user.id?.wrapped))"
+                return try self.view.make("aboutMe")
+//                return "Success!\n\nUser Info:\nName: \(user.userName)\nPassword: \(user.password)\nEmail: \(user.email)\nID: \(String(describing: user.id?.wrapped))"
             } else {
                 return "Failed !\n\nUser Info:\nName: \(user.userName)\nPassword: \(user.password)\nEmail: \(user.email)\nID: \(String(describing: user.id?.wrapped))"
             }

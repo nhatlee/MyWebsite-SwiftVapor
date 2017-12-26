@@ -1,0 +1,45 @@
+
+<html>
+<head>
+<title>Nhật Lê's Homepage</title>
+<link rel="stylesheet" href="styles/about.css" type="text/css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+</head>
+
+<body>
+
+<div class="title">Nhật Lê's Homepage</div>
+<p><a href="images/nhatlee.jpg">
+<img align="right" width="204" height="153" src="images/nhatlee.jpg"
+alt="photo">
+</a></p>
+
+<div class="box">About Me</div>
+
+<ol>
+<li><a href="https://drive.google.com/file/d/1GUnyQtdavr4d8YphcZHRU4DUGso3iM9J/view?usp=sharing">My résumé</a>.</li>
+<li>I am <a href="https://twitter.com/nhatjle6">@nhatjle6</a> on Twitter.</li>
+<li>I am <a href="https://github.com/nhatlee">nhatlee</a> on GitHub.</li>
+</ol>
+
+<div class="box">iOS</div>
+
+<div class="text">
+
+<p>When I started my software development career as an iOS developer I used Objective-C to develop iOS apps. But this time I fall in loved with <a href="https://developer.apple.com/swift/">Swift</a>. It's modern, safe, fast, less code and easy to use. I started working with Swift since 2014 (from version 1.0). And has some iOS projects public on itunes, One of them is<a href="https://itunes.apple.com/us/app/swoppler/id1081741755?mt=8"> Swoppler </a> another one you can find in my resum.</p>
+
+</div>
+
+<div class="box">Beyond the iOS</div>
+
+<div class="text">
+
+<p>I also love to working with backend. I used <a href="https://vapor.codes"> Vapor</a> to build website and API. And this time I try to use <a href="https://golang.org"> Golang</a> to build some API. Like Swift it great and modern language, and very strong to build a scalable application and one of the part make me love Go is <a href="https://golangbot.com/concurrency/">concurrency</a>, it easy to use and very powerful.</p>
+
+
+<p>I also build plugin for website on window. We use C# to build MIDI Plugin for <a href="http://pianomarvel.com/app/"> PianoMarvel website.</a></p>
+
+</div>
+
+</body>
+</html>

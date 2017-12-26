@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8">
+<title>Nhật Lê's Homepage</title>
+<link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+
+<form name="frmregister" action="" method="" style="text-align: center;">
+<table border="0">
+<tr>
+<td></td>
+<td style="color:red;"><?php echo $msg; ?></td>
+</tr>
+<tr>
+<th><label for="name"><strong>My name is Nhat. an iOS developer.</strong></label></th>
+</tr>
+<tr>
+<th><label for="name"><strong>I also try to working with web development by Swift language</strong></label></th>
+</tr>
+<tr>
+<td></td>
+
+
+</html>
